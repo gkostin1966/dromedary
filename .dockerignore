@@ -13,6 +13,7 @@
 !/nginx
 !/public
 !/solr/med
+!/solr/lib
 !/spec
 !/test
 !/tmp/.keep
@@ -23,4 +24,5 @@
 !Gemfile.lock
 !package.json
 !Rakefile
+!tiny-set.zip
 !yarn.lock

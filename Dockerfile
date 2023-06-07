@@ -15,7 +15,6 @@ RUN apt-get update -yqq && apt-get install -yqq --no-install-recommends nodejs y
 
 RUN groupadd -g $GID -o $UNAME
 RUN useradd -m -d /opt/app -u $UID -g $GID -o -s /bin/bash $UNAME
-RUN gem install bundler
 
 RUN mkdir -p /var/opt/app/data
 RUN mkdir -p /var/opt/app/gems
@@ -25,9 +24,12 @@ RUN chown -R $UID:$GID /opt/app
 COPY --chown=$UID:$GID Gemfile* /opt/app/
 
 WORKDIR /opt/app
+
+RUN gem install bundler
 RUN bundle config set --local build.sassc --disable-march-tune-native
 RUN bundle config set --local path /var/opt/app/gems
 RUN bundle install
+RUN yarn install
 
 COPY --chown=$UID:$GID . /opt/app
 USER $UNAME
